@@ -34,9 +34,11 @@ along with 404 Suggested Page. If not, see https://www.gnu.org/licenses/gpl-3.0.
  */
 function get_the_suggested_page(): WP_Post {
     $publishedPages = get_pages( 'post_status=publish' );
-    $currentUri = $_SERVER['REQUEST_URI'];
+    $currentUri = htmlspecialchars($_SERVER['REQUEST_URI']);
 
-    $shortestOffset = -1;
+    if (!preg_match("/([a-z-0-9])/", $currentUri)) {
+        return $publishedPages[0];
+    }
 
     foreach ($publishedPages as $page) {
         $offset = levenshtein($currentUri, $page->post_name);
