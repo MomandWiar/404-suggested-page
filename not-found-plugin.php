@@ -26,27 +26,30 @@ along with 404 Suggested Page. If not, see https://www.gnu.org/licenses/gpl-3.0.
 
 /**
  * Method get_the_suggested_page
- * 
- * Returns a suggested published page object 
+ *
+ * Returns a suggested published page object
  * for the current request URI.
  *
  * @return WP_Post
  */
 function get_the_suggested_page(): WP_Post {
     $publishedPages = get_pages( 'post_status=publish' );
-    $currentUri = $_SERVER['REQUEST_URI'];
+    $currentUri = filter_input( INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_URL );
+    $currentUri = filter_var( $currentUri, FILTER_VALIDATE_URL );
+
+    if ( !$currentUri || !preg_match( "/^[a-z0-9\-\/]+$/i", $currentUri ) ) {
+        return $publishedPages[0];
+    }
 
     $shortestOffset = -1;
+    foreach ( $publishedPages as $page ) {
+        $offset = levenshtein( $currentUri, sanitize_title( $page->post_name ) );
 
-    foreach ($publishedPages as $page) {
-        $offset = levenshtein($currentUri, $page->post_name);
-
-        if ($offset == 0) {
-            $suggestedPage = $page;
-            break;
+        if ( $offset == 0 ) {
+            return $page;
         }
 
-        if ($offset <= $shortestOffset || $shortestOffset < 0) {
+        if ( $offset <= $shortestOffset || $shortestOffset < 0 ) {
             $suggestedPage = $page;
             $shortestOffset = $offset;
         }

@@ -1,62 +1,41 @@
 === 404 Suggested Page ===
-Tested up to: 6.0
-Requires PHP: 7.0
+Contributors: momandwiar
+Tags: 404, page suggestion
+Requires at least: 5.0
+Tested up to: 5.9.3
+Stable tag: 1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-This plugin gives you a published page suggestion when matches with permalinks are not found.
+This plugin suggests a published page when the requested page is not found.
 
 == Description ==
 
-Whenever the user intentends to visit the page `/blogs` and navigates to to `/bogs` or `/bglo` because of a typo made by the user. **This plugin will suggest the user to the `/blogs` page**.
+404 Suggested Page is a lightweight plugin that provides a fallback mechanism for non-existing pages. When a page is not found, it searches for the closest match among the published pages and returns it as a suggestion.
+
+This plugin is useful for improving the user experience and reducing the bounce rate of your website. It can also help search engines to index your pages better by providing a suggestion for the missing page.
+
+== Installation ==
+
+1. Upload the plugin files to the `/wp-content/plugins/404-suggested-page` directory, or install the plugin through the WordPress plugins screen directly.
+2. Activate the plugin through the 'Plugins' screen in WordPress.
+
+== Frequently Asked Questions ==
+
+= How does the plugin work? =
+
+The plugin uses the `get_the_suggested_page()` function to retrieve a suggested published page for the current request URI. The function searches for the closest match among the published pages and returns it as a suggestion.
+
+= What happens if there are no published pages? =
+
+If there are no published pages, the plugin returns a default WordPress 404 error message.
 
 == Changelog ==
 
 = 1.0 =
-* Initial release
+* Initial release.
 
 == Upgrade Notice ==
 
 = 1.0 =
-Very first version of the plugin
-
-== A brief Markdown ==
-
-## Installation
-
-#### Installation from within WordPress
-
-* Visit **Plugins > Add New**.
-* Search for **404 Suggested Page**.
-* Install and activate the 404 Suggested Page plugin.
-
-#### Manual installation
-
-* Upload the entire `404-suggested-page` folder to the `/wp-content/plugins/` directory.
-* Visit **Plugins**.
-* Activate the 404 Suggested Page plugin.
-
-**Enjoy! 😁**
-
-## Usage
-
-To use this plugin you need to call the `get_the_suggested_page()` method.
-This will return a [WP_Post](https://developer.wordpress.org/reference/classes/wp_post/)  object.
-
-#### Access the suggested page properties by calling:
-* `get_the_suggested_page()->guid;` for the **URL**.
-* `get_the_suggested_page()->post_title;` for the **name**.
-* `get_the_suggested_page()->post_name;` for the **slug**.
-
-### Example
-
-Create an anchor tag to the suggested page in the 404.php file.
-
-```
-<p>
-	The page you were looking for could not be found. Did you mean:
-	<span>
-		<a href="<?= get_the_suggested_page()->guid ?>"><?= get_the_suggested_page()->post_title ?></a>
-	</span>
-</p>
-```
+Initial release.
