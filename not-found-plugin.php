@@ -35,7 +35,6 @@ along with 404 Suggested Page. If not, see https://www.gnu.org/licenses/gpl-3.0.
 function get_the_suggested_page(): WP_Post {
     $publishedPages = get_pages( 'post_status=publish' );
     $currentUri = filter_input( INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_URL );
-    $currentUri = filter_var( $currentUri, FILTER_VALIDATE_URL );
 
     if ( !$currentUri || !preg_match( "/^[a-z0-9\-\/]+$/i", $currentUri ) ) {
         return $publishedPages[0];
