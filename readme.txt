@@ -39,3 +39,6 @@ If there are no published pages, the plugin returns a default WordPress 404 erro
 
 = 1.0 =
 Initial release.
+
+= 1.1 =
+Improved for Wordpress guidelines
