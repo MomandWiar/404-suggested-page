@@ -39,7 +39,13 @@ Create an anchor tag to the suggested page in the 404.php file.
 <p>
 	The page you were looking for could not be found. Did you mean:
 	<span>
-		<a href="<?= get_the_suggested_page()->guid ?>"><?= get_the_suggested_page()->post_title ?></a>
+		<a href="<?= get_the_suggested_page()->guid ?>"><?= get_the_suggested_page()->post_title ?><a>
 	</span>
 </p>
+```
+
+Alternatively, you can use the shortcode to display the suggested-page
+
+```
+<?php echo do_shortcode('[suggested_page]'); ?>
 ```

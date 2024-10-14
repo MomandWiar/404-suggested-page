@@ -3,7 +3,7 @@
 Plugin Name: 404 Suggested Page
 Plugin URI: https://github.com/MomandWiar/404-suggested-page
 description: This plugin gives you a published page suggestion when matches with permalinks are not found.
-Version: 1.0
+Version: 1.0.2
 Author: Momand Wiar
 Author URI: https://github.com/momandwiar
 License: GPLv2 or later
