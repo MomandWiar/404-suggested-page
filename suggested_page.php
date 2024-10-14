@@ -57,4 +57,22 @@ function get_the_suggested_page(): WP_Post {
     return $suggestedPage;
 }
 
+/**
+ * Shortcode to display the suggested page link
+ *
+ * @return string
+ */
+function suggested_page_shortcode(): string {
+    $suggestedPage = get_the_suggested_page();
+
+    if ($suggestedPage) {
+        return '<a href="' . esc_url($suggestedPage->guid) . '">' . esc_html($suggestedPage->post_title) . '</a>';
+    }
+
+    return 'No suggested page found.';
+}
+
+// Register the shortcode
+add_shortcode('suggested_page', 'suggested_page_shortcode');
+
 ?>
